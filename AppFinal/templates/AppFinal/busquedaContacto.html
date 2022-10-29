@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+Busqueda Contacto
+{% endblock %}
+
+{% block main %}
+<main class='contacto_main'>
+    <h2>Busque el contacto que desee</h2>
+    <form action='{% url "nombreYapellido" %}' method='get'> {% csrf_token %}
+        <p>Color:<input type='text' name='nombreYapellido'/></p>
+        <input class='enviar' type='submit' value='Buscar' />
+    </form>
+    {% if error %}
+
+    <h2>{{ error }}</h2>
+
+    {% endif %}
+
+    {% if noms %}
+
+    <h2 style='margin: 10px;'>Resultados:</h2>
+
+    {% for nombreYapellido in noms %}
+
+    <hr style='width: 100%; margin: 0px;'>
+    <h3 style='margin: 5px 0px 2.5px 5px;'>{{ nombreYapellido.nombreYapellido }}</h3>
+    <h3 style='margin: 2.5px 0px 5px 5px;'>Requerimientos: {{ nombreYapellido.email }}</h3>
+
+    {% endfor %}
+    {% endif %}
+</main>
+{% endblock %}

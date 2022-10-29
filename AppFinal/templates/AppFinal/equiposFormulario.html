@@ -1,0 +1,22 @@
+{% extends "AppFinal/padre.html" %}
+
+{% load static %} 
+
+{% block titulo_de_pagina %} 
+<h1 class="mb-5"> ¡Te ayudamos a elegir el mejor equipo para tu industria!</h1>
+{% endblock %} 
+
+{% block contenido_de_cada_parte %} 
+
+<form action="{% url 'equiposFormulario' %}" method="POST">{% csrf_token %}
+
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    
+    <input type="submit", value="Enviar">
+    <h2>{{ mensaje }}</h2>
+</form>
+
+
+{% endblock %}  

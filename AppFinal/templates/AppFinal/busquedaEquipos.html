@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+Busqueda Equipos 
+{% endblock %}
+
+{% block main %}
+<main class='contacto_main'>
+    <h2>Busque el equipo que necesite según su objetivo</h2>
+    <form action='{% url "objetivo" %}' method='get'> {% csrf_token %}
+        <p>Color:<input type='text' name='objetivo'/></p>
+        <input class='enviar' type='submit' value='Buscar' />
+    </form>
+    {% if error %}
+
+    <h2>{{ error }}</h2>
+
+    {% endif %}
+
+    {% if equiposs %}
+
+    <h2 style='margin: 10px;'>Resultados:</h2>
+
+    {% for equipos in equiposs %}
+
+    <hr style='width: 100%; margin: 0px;'>
+    <h3 style='margin: 5px 0px 2.5px 5px;'>{{ equipos.objetivo }}</h3>
+    <h3 style='margin: 2.5px 0px 5px 5px;'>Requerimientos: {{ equipo.requerimientos }}</h3>
+
+    {% endfor %}
+    {% endif %}
+</main>
+{% endblock %}

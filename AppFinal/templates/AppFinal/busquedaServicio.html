@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+Busqueda Servicio 
+{% endblock %}
+
+{% block main %}
+<main class='contacto_main'>
+    <h2>Busque el problema </h2>
+    <form action='{% url "problema" %}' method='get'> {% csrf_token %}
+        <p>Color:<input type='text' name='problema'/></p>
+        <input class='enviar' type='submit' value='Buscar' />
+    </form>
+    {% if error %}
+
+    <h2>{{ error }}</h2>
+
+    {% endif %}
+
+    {% if problems %}
+
+    <h2 style='margin: 10px;'>Resultados:</h2>
+
+    {% for problema in problems %}
+
+    <hr style='width: 100%; margin: 0px;'>
+    <h3 style='margin: 5px 0px 2.5px 5px;'>{{ problema.problema}}</h3>
+
+    {% endfor %}
+    {% endif %}
+</main>
+{% endblock %}
